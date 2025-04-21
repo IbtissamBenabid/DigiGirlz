@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Personas - DigiGirlz Cybersecurity Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e3a8a;
+            font-size: 2.5rem;
+        }
+        
+        .team-section {
+            margin-bottom: 4rem;
+        }
+        
+        .team-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .team1 .team-header {
+            background: linear-gradient(135deg, #10b98120, #10b98105);
+            color: #047857;
+        }
+        
+        .team2 .team-header {
+            background: linear-gradient(135deg, #7c3aed20, #7c3aed05);
+            color: #6d28d9;
+        }
+        
+        .personas-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .persona-card {
+            width: 400px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .persona-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .persona-header {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .team1 .persona-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .team2 .persona-header {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        }
+        
+        .persona-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .persona-name {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .persona-role {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+        
+        .persona-content {
+            padding: 1.5rem;
+        }
+        
+        .persona-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        .section-icon {
+            font-size: 1.2rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .info-item {
+            font-size: 0.9rem;
+        }
+        
+        .info-label {
+            color: #6b7280;
+        }
+        
+        .info-value {
+            color: #1f2937;
+            font-weight: 500;
+        }
+        
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .bullet-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .bullet-list li:before {
+            content: '•';
+            position: absolute;
+            left: 0.5rem;
+            color: #10b981;
+        }
+        
+        .team2 .bullet-list li:before {
+            color: #7c3aed;
+        }
+        
+        .frustration-list li:before {
+            content: '×';
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        .quote-box {
+            background: #f9fafb;
+            border-left: 4px solid #10b981;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+        
+        .team2 .quote-box {
+            border-left-color: #7c3aed;
+        }
+        
+        .tech-level {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tech-indicator {
+            width: 20px;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+        }
+        
+        .tech-indicator.active {
+            background: #10b981;
+        }
+        
+        .team2 .tech-indicator.active {
+            background: #7c3aed;
+        }
+        
+        .behavior-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tag {
+            background: #f3f4f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+        
+        @media (max-width: 768px) {
+            .persona-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Personas</h1>
+        
+        <!-- Team 1: E-commerce Trust Platform -->
+        <div class="team-section team1">
+            <div class="team-header">
+                <h2>Team 1: E-commerce Trust Platform</h2>
+                <p>Understanding our target users for building trust in Moroccan e-commerce</p>
+            </div>
+            
+            <div class="personas-container">
+                <!-- Persona 1: Skeptical Consumer -->
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-image">👩</div>
+                        <div class="persona-name">Fatima El Amrani</div>
+                        <div class="persona-role">Skeptical Online Shopper</div>
+                    </div>
+                    <div class="persona-content">
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">📊</span> Demographics
+                            </div>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">Age</div>
+                                    <div class="info-value">35</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Location</div>
+                                    <div class="info-value">Casablanca</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Occupation</div>
+                                    <div class="info-value">Teacher</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Income</div>
+                                    <div class="info-value">Middle Class</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">🎯</span> Goals
+                            </div>
+                            <ul class="bullet-list">
+                                <li>Save time shopping for household items</li>
+                                <li>Find good deals and variety online</li>
+                                <li>Ensure her payment information is secure</li>
+                                <li>Support trustworthy local businesses</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">😓</span> Pain Points
+                            </div>
+                            <ul class="bullet-list frustration-list">
+                                <li>Fear of credit card fraud</li>
+                                <li>Uncertainty about product quality</li>
+                                <li>Worried about sharing personal data</li>
+                                <li>Heard stories of online scams</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="quote-box">
+                            "I want to shop online, but I'm afraid my information will be stolen. How do I know which sellers to trust?"
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">💻</span> Tech Savviness
+                            </div>
+                            <div class="tech-level">
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator"></div>
+                                <div class="tech-indicator"></div>
+                                <div class="tech-indicator"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">🔄</span> Behaviors
+                            </div>
+                            <div class="behavior-tags">
+                                <span class="tag">Researches thoroughly</span>
+                                <span class="tag">Asks friends first</span>
+                                <span class="tag">Prefers cash on delivery</span>
+                                <span class="tag">Reads reviews carefully</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Persona 2: Small Business Owner -->
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-image">👨</div>
+                        <div class="persona-name">Karim Benjelloun</div>
+                        <div class="persona-role">Small Business Owner</div>
+                    </div>
+                    <div class="persona-content">
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">📊</span> Demographics
+                            </div>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">Age</div>
+                                    <div class="info-value">42</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Location</div>
+                                    <div class="info-value">Marrakech</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Business</div>
+                                    <div class="info-value">Artisan Shop</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Employees</div>
+                                    <div class="info-value">5</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">🎯</span> Goals
+                            </div>
+                            <ul class="bullet-list">
+                                <li>Expand business beyond local market</li>
+                                <li>Build trust with online customers</li>
+                                <li>Increase sales through e-commerce</li>
+                                <li>Manage online orders efficiently</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">😓</span> Pain Points
+                            </div>
+                            <ul class="bullet-list frustration-list">
+                                <li>Customers don't trust online payments</li>
+                                <li>High transaction fees on platforms</li>
+                                <li>Limited technical knowledge</li>
+                                <li>Negative perception of online selling</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="quote-box">
+                            "I have quality products, but people are afraid to buy online. I need a way to show them I'm trustworthy."
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">💻</span> Tech Savviness
+                            </div>
+                            <div class="tech-level">
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator"></div>
+                                <div class="tech-indicator"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">🔄</span> Behaviors
+                            </div>
+                            <div class="behavior-tags">
+                                <span class="tag">Uses WhatsApp for business</span>
+                                <span class="tag">Attends workshops</span>
+                                <span class="tag">Networks locally</span>
+                                <span class="tag">Values customer relationships</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Team 2: Child-Safe Browsing -->
+        <div class="team-section team2">
+            <div class="team-header">
+                <h2>Team 2: Child-Safe Browsing AI Solution</h2>
+                <p>Understanding parents and children in the digital safety landscape</p>
+            </div>
+            
+            <div class="personas-container">
+                <!-- Persona 1: Concerned Parent -->
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-image">👨</div>
+                        <div class="persona-name">Ahmed Tazi</div>
+                        <div class="persona-role">Concerned Parent</div>
+                    </div>
+                    <div class="persona-content">
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">📊</span> Demographics
+                            </div>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">Age</div>
+                                    <div class="info-value">38</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Location</div>
+                                    <div class="info-value">Rabat</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Occupation</div>
+                                    <div class="info-value">Engineer</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Children</div>
+                                    <div class="info-value">2 (12 & 8)</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">🎯</span> Goals
+                            </div>
+                            <ul class="bullet-list">
+                                <li>Protect children from online dangers</li>
+                                <li>Monitor screen time effectively</li>
+                                <li>Allow educational content access</li>
+                                <li>Maintain trust with children</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">😓</span> Pain Points
+                            </div>
+                            <ul class="bullet-list frustration-list">
+                                <li>Can't monitor everything children see</li>
+                                <li>Worried about cyberbullying</li>
+                                <li>Children need internet for school</li>
+                                <li>Complex parental control settings</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="quote-box">
+                            "I want my children to use technology safely, but I can't always be there to watch what they're doing online."
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">💻</span> Tech Savviness
+                            </div>
+                            <div class="tech-level">
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">🔄</span> Behaviors
+                            </div>
+                            <div class="behavior-tags">
+                                <span class="tag">Checks browsing history</span>
+                                <span class="tag">Sets time limits</span>
+                                <span class="tag">Talks about online safety</span>
+                                <span class="tag">Seeks tech solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Persona 2: Teen User -->
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-image">👧</div>
+                        <div class="persona-name">Sara Tazi</div>
+                        <div class="persona-role">Teen Internet User</div>
+                    </div>
+                    <div class="persona-content">
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">📊</span> Demographics
+                            </div>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">Age</div>
+                                    <div class="info-value">12</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Location</div>
+                                    <div class="info-value">Rabat</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Grade</div>
+                                    <div class="info-value">7th Grade</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Devices</div>
+                                    <div class="info-value">Tablet, Phone</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">🎯</span> Goals
+                            </div>
+                            <ul class="bullet-list">
+                                <li>Watch entertainment videos</li>
+                                <li>Play online games with friends</li>
+                                <li>Research for school projects</li>
+                                <li>Stay connected with classmates</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">😓</span> Pain Points
+                            </div>
+                            <ul class="bullet-list frustration-list">
+                                <li>Strict parental controls</li>
+                                <li>Accidentally seeing scary content</li>
+                                <li>Feeling monitored all the time</li>
+                                <li>Blocked educational sites</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="quote-box">
+                            "Sometimes I see things online that make me uncomfortable, but I don't want to tell my parents because they might take away my tablet."
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">💻</span> Tech Savviness
+                            </div>
+                            <div class="tech-level">
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                                <div class="tech-indicator active"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="persona-section">
+                            <div class="section-title">
+                                <span class="section-icon">🔄</span> Behaviors
+                            </div>
+                            <div class="behavior-tags">
+                                <span class="tag">Uses social media</span>
+                                <span class="tag">Watches YouTube</span>
+                                <span class="tag">Plays online games</span>
+                                <span class="tag">Curious explorer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

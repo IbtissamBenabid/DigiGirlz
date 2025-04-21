@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App Prototypes - DigiGirlz Cybersecurity Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f7fa;
+            color: #1f2937;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+        }
+        
+        .project-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .project {
+            flex: 1;
+            min-width: 600px;
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .project.team1 h2 {
+            color: #10b981;
+        }
+        
+        .project.team2 h2 {
+            color: #7c3aed;
+        }
+        
+        .screens-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: white;
+            border-radius: 36px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 12px solid #1f2937;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .phone-notch {
+            width: 120px;
+            height: 25px;
+            background: #1f2937;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        
+        .screen {
+            width: 100%;
+            height: 100%;
+            padding-top: 30px;
+            background: #ffffff;
+            position: relative;
+        }
+        
+        .status-bar {
+            height: 20px;
+            background: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 12px;
+        }
+        
+        .header {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .content {
+            padding: 1rem;
+            overflow-y: auto;
+            height: calc(100% - 100px);
+        }
+        
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: #ffffff;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .nav-item {
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        
+        .trust-badge {
+            background: #10b981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        
+        .security-indicator {
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            padding: 8px;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+        
+        .product-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        
+        .alert-box {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+        
+        .safety-badge {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            width: 100%;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #1f2937;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            width: 100%;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .stat-card {
+            background: #f9fafb;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 8px 0;
+        }
+        
+        .slider-control {
+            width: 100%;
+            margin: 12px 0;
+        }
+        
+        .screen-title {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mobile App Visual Prototypes</h1>
+        
+        <!-- Team 1: E-commerce Trust Platform -->
+        <div class="project team1">
+            <h2>Team 1: E-commerce Trust Platform</h2>
+            <div class="screens-container">
+                <!-- Home Screen -->
+                <div>
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="header">
+                                <h3>Trust Market</h3>
+                                <span>🔔</span>
+                            </div>
+                            <div class="content">
+                                <div class="security-indicator">
+                                    <strong>🛡️ Secure Shopping Zone</strong>
+                                    <p style="font-size: 0.9rem;">All merchants verified</p>
+                                </div>
+                                <h4 style="margin: 12px 0;">Featured Stores</h4>
+                                <div class="product-card">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div>
+                                            <strong>Casablanca Crafts</strong>
+                                            <div class="trust-badge">✓ Verified</div>
+                                        </div>
+                                        <span style="color: #f59e0b;">⭐ 4.8</span>
+                                    </div>
+                                    <p style="font-size: 0.9rem; color: #6b7280;">Traditional Moroccan goods</p>
+                                </div>
+                                <div class="product-card">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div>
+                                            <strong>Tech Haven</strong>
+                                            <div class="trust-badge">✓ Verified</div>
+                                        </div>
+                                        <span style="color: #f59e0b;">⭐ 4.9</span>
+                                    </div>
+                                    <p style="font-size: 0.9rem; color: #6b7280;">Electronics & gadgets</p>
+                                </div>
+                                <h4 style="margin: 16px 0 8px;">Security Tips</h4>
+                                <div style="background: #f0fdf4; padding: 12px; border-radius: 8px;">
+                                    <strong>💡 Learn Safe Shopping</strong>
+                                    <p style="font-size: 0.9rem;">Read our guide to secure online shopping</p>
+                                </div>
+                            </div>
+                            <div class="bottom-nav">
+                                <div class="nav-item">🏠<br/>Home</div>
+                                <div class="nav-item">🔍<br/>Search</div>
+                                <div class="nav-item">🛡️<br/>Learn</div>
+                                <div class="nav-item">👤<br/>Profile</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-title">Home Screen</p>
+                </div>
+                
+                <!-- Checkout Screen -->
+                <div>
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="header">
+                                <span>←</span>
+                                <h3>Secure Checkout</h3>
+                                <span>🔒</span>
+                            </div>
+                            <div class="content">
+                                <div style="background: #f0fdf4; padding: 12px; border-radius: 8px; text-align: center;">
+                                    <strong>🔒 Secure Payment</strong>
+                                    <p style="font-size: 0.9rem;">Your transaction is protected</p>
+                                </div>
+                                <div style="margin: 16px 0;">
+                                    <h4>Order Summary</h4>
+                                    <div class="product-card">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <span>Moroccan Teapot</span>
+                                            <span>450 MAD</span>
+                                        </div>
+                                        <div style="font-size: 0.8rem; color: #6b7280;">Casablanca Crafts</div>
+                                    </div>
+                                </div>
+                                <h4>Payment Method</h4>
+                                <div style="display: flex; gap: 8px; margin: 8px 0;">
+                                    <div style="flex: 1; border: 2px solid #3b82f6; padding: 12px; border-radius: 8px; text-align: center;">
+                                        💳<br/>Card
+                                    </div>
+                                    <div style="flex: 1; border: 1px solid #e5e7eb; padding: 12px; border-radius: 8px; text-align: center;">
+                                        🏦<br/>Bank
+                                    </div>
+                                </div>
+                                <h4 style="margin-top: 16px;">Security Features</h4>
+                                <div style="background: #f9fafb; padding: 12px; border-radius: 8px;">
+                                    <div style="margin: 4px 0;">✓ End-to-end encryption</div>
+                                    <div style="margin: 4px 0;">✓ Fraud detection active</div>
+                                    <div style="margin: 4px 0;">✓ Money-back guarantee</div>
+                                </div>
+                                <button class="btn-primary">Complete Purchase</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-title">Secure Checkout</p>
+                </div>
+                
+                <!-- Education Center -->
+                <div>
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="header">
+                                <span>←</span>
+                                <h3>Safety Center</h3>
+                                <span>ℹ️</span>
+                            </div>
+                            <div class="content">
+                                <h4>Learn to Shop Safely</h4>
+                                <div class="product-card">
+                                    <strong>🔐 Identifying Secure Websites</strong>
+                                    <p style="font-size: 0.9rem; color: #6b7280;">Learn what to look for when shopping online</p>
+                                    <div style="font-size: 0.8rem; color: #3b82f6;">5 min read</div>
+                                </div>
+                                <div class="product-card">
+                                    <strong>💳 Payment Safety 101</strong>
+                                    <p style="font-size: 0.9rem; color: #6b7280;">Understand safe payment methods</p>
+                                    <div style="font-size: 0.8rem; color: #3b82f6;">3 min read</div>
+                                </div>
+                                <div class="product-card">
+                                    <strong>🚩 Spotting Online Scams</strong>
+                                    <p style="font-size: 0.9rem; color: #6b7280;">Common red flags to watch for</p>
+                                    <div style="font-size: 0.8rem; color: #3b82f6;">4 min read</div>
+                                </div>
+                                <h4 style="margin: 16px 0 8px;">Video Tutorials</h4>
+                                <div style="background: #f9fafb; padding: 12px; border-radius: 8px; text-align: center;">
+                                    <div style="font-size: 3rem;">▶️</div>
+                                    <strong>How to Verify a Seller</strong>
+                                    <p style="font-size: 0.8rem; color: #6b7280;">2:30</p>
+                                </div>
+                            </div>
+                            <div class="bottom-nav">
+                                <div class="nav-item">🏠<br/>Home</div>
+                                <div class="nav-item">🔍<br/>Search</div>
+                                <div class="nav-item" style="color: #3b82f6;">🛡️<br/>Learn</div>
+                                <div class="nav-item">👤<br/>Profile</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-title">Education Center</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Team 2: Child-Safe Browsing -->
+        <div class="project team2">
+            <h2>Team 2: Child-Safe Browsing AI Solution</h2>
+            <div class="screens-container">
+                <!-- Parent Dashboard -->
+                <div>
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="header">
+                                <h3>SafeGuard</h3>
+                                <span>⚙️</span>
+                            </div>
+                            <div class="content">
+                                <div style="text-align: center; margin: 16px 0;">
+                                    <h2>Welcome, Ahmed</h2>
+                                    <p style="color: #6b7280;">Sara is protected</p>
+                                </div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                    <div class="stat-card">
+                                        <div style="font-size: 1.5rem; color: #10b981;">✓</div>
+                                        <strong>Active</strong>
+                                        <p style="font-size: 0.8rem; color: #6b7280;">Protection</p>
+                                    </div>
+                                    <div class="stat-card">
+                                        <div style="font-size: 1.5rem; color: #7c3aed;">3</div>
+                                        <strong>Blocks</strong>
+                                        <p style="font-size: 0.8rem; color: #6b7280;">This week</p>
+                                    </div>
+                                </div>
+                                <h4 style="margin: 16px 0 8px;">Quick Settings</h4>
+                                <div class="security-indicator">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>Protection Level</span>
+                                        <select style="padding: 4px 8px; border-radius: 4px;">
+                                            <option>High</option>
+                                            <option>Medium</option>
+                                            <option>Low</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <h4 style="margin: 16px 0 8px;">Recent Activity</h4>
+                                <div class="alert-box">
+                                    <strong>⚠️ Alert: Inappropriate Content</strong>
+                                    <p style="font-size: 0.9rem;">Blocked at 3:45 PM</p>
+                                </div>
+                                <button class="btn-primary">View Full Report</button>
+                            </div>
+                            <div class="bottom-nav">
+                                <div class="nav-item" style="color: #7c3aed;">📊<br/>Dashboard</div>
+                                <div class="nav-item">🛡️<br/>Settings</div>
+                                <div class="nav-item">📜<br/>History</div>
+                                <div class="nav-item">👨‍👧<br/>Family</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-title">Parent Dashboard</p>
+                </div>
+                
+                <!-- Child Protection View -->
+                <div>
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="header">
+                                <h3>Safe Browser</h3>
+                                <div class="safety-badge">Protected</div>
+                            </div>
+                            <div class="content">
+                                <div style="background: #dbeafe; padding: 12px; border-radius: 8px; text-align: center; margin: 8px 0;">
+                                    <strong>🛡️ You're Safe!</strong>
+                                    <p style="font-size: 0.9rem;">AI protection is active</p>
+                                </div>
+                                <div style="margin: 16px 0;">
+                                    <input type="text" placeholder="Search safely..." style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px;">
+                                </div>
+                                <h4>Safe Sites</h4>
+                                <div class="product-card">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span>Educational Resources</span>
+                                        <span style="color: #10b981;">✓ Safe</span>
+                                    </div>
+                                </div>
+                                <div class="product-card">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span>Kids Games</span>
+                                        <span style="color: #10b981;">✓ Safe</span>
+                                    </div>
+                                </div>
+                                <div class="product-card">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span>Video Library</span>
+                                        <span style="color: #10b981;">✓ Safe</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 16px; padding: 12px; background: #f3e8ff; border-radius: 8px;">
+                                    <strong>🎯 Today's Goal</strong>
+                                    <p style="font-size: 0.9rem;">Learn about online kindness</p>
+                                </div>
+                            </div>
+                            <div class="bottom-nav">
+                                <div class="nav-item">🏠<br/>Home</div>
+                                <div class="nav-item">🔍<br/>Browse</div>
+                                <div class="nav-item">🎮<br/>Games</div>
+                                <div class="nav-item">📚<br/>Learn</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-title">Child View</p>
+                </div>
+                
+                <!-- Alert Screen -->
+                <div>
+                    <div class="phone-mockup">
+                        <div class="phone-notch"></div>
+                        <div class="screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="content" style="padding-top: 80px; text-align: center;">
+                                <div style="font-size: 5rem; margin: 20px 0;">⚠️</div>
+                                <h2>Content Blocked</h2>
+                                <p style="margin: 16px 0; color: #6b7280;">This content may not be safe for you</p>
+                                <div style="background: #fef2f2; padding: 16px; border-radius: 8px; margin: 16px;">
+                                    <strong>What happened?</strong>
+                                    <p style="font-size: 0.9rem; margin-top: 8px;">Our AI detected content that might not be appropriate for your age.</p>
+                                </div>
+                                <button class="btn-primary">Return to Safety</button>
+                                <button class="btn-secondary">Tell My Parents</button>
+                                <div style="margin-top: 24px; padding: 16px; background: #f9fafb; border-radius: 8px;">
+                                    <h4>Learn More</h4>
+                                    <p style="font-size: 0.9rem; color: #6b7280;">Why do we block certain content?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="screen-title">Alert Screen</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

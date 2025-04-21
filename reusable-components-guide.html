@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Reusable Components in Figma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+        }
+        
+        .exercise-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 1rem;
+        }
+        
+        .team-section {
+            margin-bottom: 4rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .team1 {
+            border-top: 4px solid #10b981;
+        }
+        
+        .team2 {
+            border-top: 4px solid #7c3aed;
+        }
+        
+        .team-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+        
+        .team1 .team-title {
+            color: #047857;
+        }
+        
+        .team2 .team-title {
+            color: #6d28d9;
+        }
+        
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .component-card {
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .component-preview {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .component-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .component-description {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+        
+        .variants-container {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .variant-badge {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            background: #e5e7eb;
+        }
+        
+        /* Component Specific Styles */
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .trust-badge.verified {
+            background: #d1fae5;
+            color: #047857;
+        }
+        
+        .trust-badge.premium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .trust-badge.new {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .button.primary {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .button.secondary {
+            background: #f3f4f6;
+            color: #1f2937;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .button.danger {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .alert-notification {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .alert-notification.warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fcd34d;
+        }
+        
+        .alert-notification.danger {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #f87171;
+        }
+        
+        .alert-notification.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+        
+        .review-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .rating-stars {
+            color: #f59e0b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-text {
+            color: #4b5563;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+        
+        .protection-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .protection-indicator.active {
+            background: #dcfce7;
+            color: #15803d;
+        }
+        
+        .protection-indicator.monitoring {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+        
+        .protection-indicator.blocked {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .age-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .age-badge.all {
+            background: #dcfce7;
+            color: #15803d;
+        }
+        
+        .age-badge.teen {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .age-badge.pg {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .best-practices {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .best-practices-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .best-practices-list {
+            list-style: none;
+        }
+        
+        .best-practices-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .best-practices-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+        
+        .anatomy-diagram {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            position: relative;
+        }
+        
+        .anatomy-label {
+            position: absolute;
+            background: #1f2937;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="exercise-header">
+            <h1>Building Reusable Components in Figma</h1>
+            <p>Create efficient, consistent, and maintainable design systems</p>
+        </div>
+        
+        <!-- Team 1: E-commerce Trust Platform -->
+        <div class="team-section team1">
+            <h2 class="team-title">Team 1: E-commerce Trust Platform Components</h2>
+            
+            <div class="components-grid">
+                <!-- Trust Badge Component -->
+                <div class="component-card">
+                    <div class="component-title">Trust Badges</div>
+                    <div class="component-description">Visual indicators that build customer confidence</div>
+                    <div class="component-preview">
+                        <div class="trust-badge verified">✓ Verified Seller</div>
+                    </div>
+                    <div class="variants-container">
+                        <span class="variant-badge">Verified</span>
+                        <span class="variant-badge">Premium</span>
+                        <span class="variant-badge">New</span>
+                    </div>
+                </div>
+                
+                <!-- Secure Payment Button -->
+                <div class="component-card">
+                    <div class="component-title">Secure Payment Button</div>
+                    <div class="component-description">Button component with security indicators</div>
+                    <div class="component-preview">
+                        <button class="button primary">🔒 Pay Securely</button>
+                    </div>
+                    <div class="variants-container">
+                        <span class="variant-badge">Primary</span>
+                        <span class="variant-badge">Secondary</span>
+                        <span class="variant-badge">Disabled</span>
+                    </div>
+                </div>
+                
+                <!-- Review Card -->
+                <div class="component-card">
+                    <div class="component-title">Review Card</div>
+                    <div class="component-description">User reviews with verification badges</div>
+                    <div class="component-preview">
+                        <div class="review-card">
+                            <div class="rating-stars">★★★★★</div>
+                            <div class="review-text">Great product, fast delivery!</div>
+                            <div class="reviewer-info">
+                                <div class="avatar">F</div>
+                                <span>Fatima • Verified Buyer</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="variants-container">
+                        <span class="variant-badge">With Image</span>
+                        <span class="variant-badge">Without Image</span>
+                        <span class="variant-badge">Compact</span>
+                    </div>
+                </div>
+                
+                <!-- Security Alert -->
+                <div class="component-card">
+                    <div class="component-title">Security Alert</div>
+                    <div class="component-description">Information alerts for safe shopping</div>
+                    <div class="component-preview">
+                        <div class="alert-notification info">
+                            ℹ️ This seller has been verified
+                        </div>
+                    </div>
+                    <div class="variants-container">
+                        <span class="variant-badge">Info</span>
+                        <span class="variant-badge">Warning</span>
+                        <span class="variant-badge">Success</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="best-practices">
+                <div class="best-practices-title">Component Best Practices for Team 1:</div>
+                <ul class="best-practices-list">
+                    <li>Use trust-building colors (green for verified, blue for secure)</li>
+                    <li>Include security icons consistently (locks, shields, checkmarks)</li>
+                    <li>Create variants for different seller verification levels</li>
+                    <li>Design components that work across mobile and desktop</li>
+                    <li>Include hover states for interactive elements</li>
+                    <li>Use Auto Layout for responsive design</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Team 2: Child-Safe Browsing -->
+        <div class="team-section team2">
+            <h2 class="team-title">Team 2: Child-Safe Browsing Components</h2>
+            
+            <div class="components-grid">
+                <!-- Protection Status -->
+                <div class="component-card">
+                    <div class="component-title">Protection Status Indicator</div>
+                    <div class="component-description">Real-time protection status display</div>
+                    <div class="component-preview">
+                        <div class="protection-indicator active">🛡️ Protected</div>
+                    </div>
+                    <div class="variants-container">
+                        <span class="variant-badge">Active</span>
+                        <span class="variant-badge">Monitoring</span>
+                        <span class="variant-badge">Blocked</span>
+                    </div>
+                </div>
+                
+                <!-- Alert Notification -->
+                <div class="component-card">
+                    <div class="component-title">Alert Notification</div>
+                    <div class="component-description">Parent and child alert messages</div>
+                    <div class="component-preview">
+                        <div class="alert-notification warning">
+                            ⚠️ Content blocked for safety
+                        </div>
+                    </div>
+                    <div class="variants-container">
+                        <span class="variant-badge">Warning</span>
+                        <span class="variant-badge">Danger</span>
+                        <span class="variant-badge">Info</span>
+                    </div>
+                </div>
+                
+                <!-- Age Rating Badge -->
+                <div class="component-card">
+                    <div class="component-title">Age Rating Badge</div>
+                    <div class="component-description">Visual age-appropriate indicators</div>
+                    <div class="component-preview">
+                        <div class="age-badge teen">12+</div>
+                    </div>
+                    <div class="variants-container">
+                        <span class="variant-badge">All Ages</span>
+                        <span class="variant-badge">7+</span>
+                        <span class="variant-badge">12+</span>
+                        <span class="variant-badge">16+</span>
+                    </div>
+                </div>
+                
+                <!-- Activity Card -->
+                <div class="component-card">
+                    <div class="component-title">Activity Card</div>
+                    <div class="component-description">Recent activity summary cards</div>
+                    <div class="component-preview">
+                        <div class="review-card">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong>YouTube</strong>
+                                <span style="color: #10b981;">✓ Safe</span>
+                            </div>
+                            <div class="review-text">1.5 hours watched today</div>
+                            <div class="reviewer-info">
+                                <span style="color: #6b7280;">Last active: 5 mins ago</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="variants-container">
+                        <span class="variant-badge">Detailed</span>
+                        <span class="variant-badge">Compact</span>
+                        <span class="variant-badge">Alert</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="best-practices">
+                <div class="best-practices-title">Component Best Practices for Team 2:</div>
+                <ul class="best-practices-list">
+                    <li>Use friendly, non-threatening visual language for children</li>
+                    <li>Create clear visual hierarchy for parent vs. child interfaces</li>
+                    <li>Use consistent color coding for safety levels</li>
+                    <li>Include animations for state changes (like blocking content)</li>
+                    <li>Design for different age groups (icons, language complexity)</li>
+                    <li>Ensure components are easily tappable on mobile devices</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- General Component Creation Guide -->
+        <div class="team-section" style="border-top: 4px solid #3b82f6;">
+            <h2 class="team-title" style="color: #1e3a8a;">How to Create Components in Figma</h2>
+            
+            <div class="components-grid">
+                <div class="component-card">
+                    <div class="component-title">1. Design the Base Element</div>
+                    <div class="component-description">Create your design element using basic shapes and text</div>
+                    <div class="component-preview">
+                        <button class="button primary">Button</button>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-title">2. Create Component</div>
+                    <div class="component-description">Select element → Right-click → Create Component (Ctrl/Cmd + Alt + K)</div>
+                    <div class="component-preview" style="background: #f0f9ff;">
+                        <div style="border: 2px solid #3b82f6; padding: 0.5rem; border-radius: 0.25rem;">
+                            🔲 Button Component
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-title">3. Add Variants</div>
+                    <div class="component-description">Select component → Add variant property in right panel</div>
+                    <div class="component-preview" style="flex-direction: column; gap: 0.5rem;">
+                        <button class="button primary">Primary</button>
+                        <button class="button secondary">Secondary</button>
+                    </div>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-title">4. Use Auto Layout</div>
+                    <div class="component-description">Apply Auto Layout for responsive behavior (Shift + A)</div>
+                    <div class="component-preview">
+                        <div style="border: 1px dashed #3b82f6; padding: 0.5rem;">
+                            <div style="font-size: 0.8rem; color: #3b82f6;">Auto Layout Applied</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="anatomy-diagram">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Component Anatomy</h3>
+                <div style="position: relative; padding: 2rem;">
+                    <button class="button primary" style="position: relative;">
+                        Primary Button
+                        <div class="anatomy-label" style="top: -20px; left: 0;">Component frame</div>
+                        <div class="anatomy-label" style="bottom: -20px; left: 50%; transform: translateX(-50%);">Text layer</div>
+                        <div class="anatomy-label" style="top: 50%; right: -80px; transform: translateY(-50%);">Auto Layout</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

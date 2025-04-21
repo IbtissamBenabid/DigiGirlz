@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Statement Refinement Exercise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+        }
+        
+        .exercise-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 1rem;
+        }
+        
+        .team-container {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .team-board {
+            flex: 1;
+            min-width: 600px;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .team1 {
+            border-top: 4px solid #10b981;
+        }
+        
+        .team2 {
+            border-top: 4px solid #7c3aed;
+        }
+        
+        .team-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .team1 .team-title {
+            color: #047857;
+        }
+        
+        .team2 .team-title {
+            color: #6d28d9;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .section-icon {
+            font-size: 1.4rem;
+        }
+        
+        .problem-statement {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .pain-point {
+            background: #fff1f2;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #ef4444;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .solution-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .solution-card {
+            background: #f0fdf4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid #10b981;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .team2 .solution-card {
+            background: #f5f3ff;
+            border-color: #7c3aed;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .moscow-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .moscow-category {
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        
+        .moscow-must {
+            background: #fee2e2;
+        }
+        
+        .moscow-should {
+            background: #fef9c3;
+        }
+        
+        .moscow-could {
+            background: #dbeafe;
+        }
+        
+        .moscow-wont {
+            background: #f3f4f6;
+        }
+        
+        .moscow-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-item {
+            background: white;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        .legend {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+        }
+        
+        .legend-items {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="exercise-header">
+            <h1>Exercise 1: Problem Statement Refinement</h1>
+            <p>Define the problem, identify pain points, brainstorm solutions, and prioritize features</p>
+        </div>
+        
+        <div class="team-container">
+            <!-- Team 1: E-commerce Trust Platform -->
+            <div class="team-board team1">
+                <h2 class="team-title">Team 1: E-commerce Trust Platform</h2>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-icon">🎯</span>
+                        Core Problem Statement
+                    </div>
+                    <div class="problem-statement">
+                        Moroccans are reluctant to shop online due to fears of data theft and fraud, limiting e-commerce adoption (only 12% shop online) and hindering economic growth for small businesses and consumers.
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-icon">😓</span>
+                        Main Pain Points
+                    </div>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span>💳</span> Fear of credit card fraud
+                        </div>
+                        <div class="pain-point">
+                            <span>🤔</span> Lack of trust in sellers
+                        </div>
+                        <div class="pain-point">
+                            <span>🔒</span> Data privacy concerns
+                        </div>
+                        <div class="pain-point">
+                            <span>📦</span> Uncertainty about product quality
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-icon">💡</span>
+                        Potential Solutions
+                    </div>
+                    <div class="solution-cards">
+                        <div class="solution-card">
+                            <h4>Secure Payment Gateway</h4>
+                            <p>End-to-end encryption</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Trust Verification</h4>
+                            <p>Seller certification</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Education Center</h4>
+                            <p>Safe shopping guides</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Reviews System</h4>
+                            <p>Verified buyer feedback</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>AI Fraud Detection</h4>
+                            <p>Real-time monitoring</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Customer Support</h4>
+                            <p>24/7 assistance</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-icon">📊</span>
+                        MoSCoW Prioritization
+                    </div>
+                    <div class="moscow-grid">
+                        <div class="moscow-category moscow-must">
+                            <div class="moscow-title">
+                                <span>🔴</span> Must Have
+                            </div>
+                            <ul class="feature-list">
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Secure payment gateway with SSL
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Basic seller verification system
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Customer review system
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Money-back guarantee policy
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="moscow-category moscow-should">
+                            <div class="moscow-title">
+                                <span>🟡</span> Should Have
+                            </div>
+                            <ul class="feature-list">
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Educational content hub
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    AI fraud detection system
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Multi-language support
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Mobile-optimized design
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="moscow-category moscow-could">
+                            <div class="moscow-title">
+                                <span>🔵</span> Could Have
+                            </div>
+                            <ul class="feature-list">
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Live chat support
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Seller rating algorithm
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Video tutorials
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Community forum
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="moscow-category moscow-wont">
+                            <div class="moscow-title">
+                                <span>⚪</span> Won't Have (this time)
+                            </div>
+                            <ul class="feature-list">
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Social media integration
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Cryptocurrency payments
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    AR product visualization
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Loyalty rewards program
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team 2: Child-Safe Browsing -->
+            <div class="team-board team2">
+                <h2 class="team-title">Team 2: Child-Safe Browsing AI Solution</h2>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-icon">🎯</span>
+                        Core Problem Statement
+                    </div>
+                    <div class="problem-statement">
+                        Children face cyberbullying and unsafe content online (1 in 3 experience cyberbullying, 60% encounter harmful content), while current safety solutions lack real-time adaptability and age-appropriate customization.
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-icon">😓</span>
+                        Main Pain Points
+                    </div>
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span>🚨</span> Cyberbullying incidents
+                        </div>
+                        <div class="pain-point">
+                            <span>📱</span> Inappropriate content exposure
+                        </div>
+                        <div class="pain-point">
+                            <span>👀</span> Lack of parental visibility
+                        </div>
+                        <div class="pain-point">
+                            <span>⚙️</span> Complex safety tools
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-icon">💡</span>
+                        Potential Solutions
+                    </div>
+                    <div class="solution-cards">
+                        <div class="solution-card">
+                            <h4>AI Content Analysis</h4>
+                            <p>Real-time monitoring</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Instant Alerts</h4>
+                            <p>Parent notification</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Age Customization</h4>
+                            <p>Adaptive protection</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Activity Dashboard</h4>
+                            <p>Parent overview</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Safety Education</h4>
+                            <p>Kids' learning module</p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Face Recognition</h4>
+                            <p>User identification</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <div class="section-title">
+                        <span class="section-icon">📊</span>
+                        MoSCoW Prioritization
+                    </div>
+                    <div class="moscow-grid">
+                        <div class="moscow-category moscow-must">
+                            <div class="moscow-title">
+                                <span>🔴</span> Must Have
+                            </div>
+                            <ul class="feature-list">
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Real-time content filtering AI
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Parent control dashboard
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Instant alert system
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Basic activity logging
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="moscow-category moscow-should">
+                            <div class="moscow-title">
+                                <span>🟡</span> Should Have
+                            </div>
+                            <ul class="feature-list">
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Age-based customization
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Educational content for kids
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Face ID authentication
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Behavioral analysis
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="moscow-category moscow-could">
+                            <div class="moscow-title">
+                                <span>🔵</span> Could Have
+                            </div>
+                            <ul class="feature-list">
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Mood detection
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Parent-child chat
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Time management tools
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Social media monitoring
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="moscow-category moscow-wont">
+                            <div class="moscow-title">
+                                <span>⚪</span> Won't Have (this time)
+                            </div>
+                            <ul class="feature-list">
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    VR safety simulations
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Multi-device synchronization
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    AI counseling chatbot
+                                </li>
+                                <li class="feature-item">
+                                    <span class="feature-dot"></span>
+                                    Peer support network
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <h3>MoSCoW Method Legend</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #fee2e2;"></div>
+                    <span>Must Have - Essential features for MVP</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #fef9c3;"></div>
+                    <span>Should Have - Important but not critical</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #dbeafe;"></div>
+                    <span>Could Have - Nice to have if resources allow</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f3f4f6;"></div>
+                    <span>Won't Have - Future releases</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

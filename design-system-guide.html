@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System Guide - DigiGirlz Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+            font-size: 2.5rem;
+        }
+        
+        .design-system-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 1rem;
+        }
+        
+        .team-section {
+            margin-bottom: 4rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .team1 {
+            border-top: 4px solid #10b981;
+        }
+        
+        .team2 {
+            border-top: 4px solid #7c3aed;
+        }
+        
+        .team-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .team1 .team-title {
+            color: #047857;
+        }
+        
+        .team2 .team-title {
+            color: #6d28d9;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .color-card {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .color-swatch {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .color-info {
+            padding: 1rem;
+            background: white;
+        }
+        
+        .color-name {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .color-hex {
+            font-family: monospace;
+            color: #6b7280;
+        }
+        
+        /* Typography */
+        .typography-example {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+        }
+        
+        .typography-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .typography-specs {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #3b82f6;
+            margin-top: 0.5rem;
+        }
+        
+        /* Spacing */
+        .spacing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .spacing-example {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .spacing-box {
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Components Preview */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .component-example {
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+        }
+        
+        .component-label {
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        /* Icons */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+        
+        .icon-card {
+            text-align: center;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            transition: transform 0.2s;
+        }
+        
+        .icon-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .icon-symbol {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .icon-name {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        
+        /* Buttons */
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+        
+        .button-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .button-secondary {
+            background: #f3f4f6;
+            color: #1f2937;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .button-success {
+            background: #10b981;
+            color: white;
+        }
+        
+        .button-danger {
+            background: #ef4444;
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .color-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="design-system-header">
+            <h1>Design System Guide</h1>
+            <p>Consistent design foundations for cybersecurity projects</p>
+        </div>
+        
+        <!-- Team 1: E-commerce Trust Platform -->
+        <div class="team-section team1">
+            <h2 class="team-title">Team 1: E-commerce Trust Platform</h2>
+            
+            <!-- Color Palette -->
+            <div class="section">
+                <h3 class="section-title">Color Palette</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #1e3a8a;">Primary</div>
+                        <div class="color-info">
+                            <div class="color-name">Trust Blue</div>
+                            <div class="color-hex">#1e3a8a</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #3b82f6;">Secondary</div>
+                        <div class="color-info">
+                            <div class="color-name">Secure Blue</div>
+                            <div class="color-hex">#3b82f6</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #10b981;">Success</div>
+                        <div class="color-info">
+                            <div class="color-name">Verified Green</div>
+                            <div class="color-hex">#10b981</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #f59e0b;">Accent</div>
+                        <div class="color-info">
+                            <div class="color-name">Rating Gold</div>
+                            <div class="color-hex">#f59e0b</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #ef4444;">Error</div>
+                        <div class="color-info">
+                            <div class="color-name">Alert Red</div>
+                            <div class="color-hex">#ef4444</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #f3f4f6; color: #000;">Background</div>
+                        <div class="color-info">
+                            <div class="color-name">Light Gray</div>
+                            <div class="color-hex">#f3f4f6</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Typography -->
+            <div class="section">
+                <h3 class="section-title">Typography</h3>
+                <div class="typography-example">
+                    <div class="typography-label">Heading 1</div>
+                    <h1 style="font-family: 'Poppins', sans-serif; font-weight: 700;">Trusted E-commerce Platform</h1>
+                    <div class="typography-specs">Poppins Bold • 36px • 1.2 line height</div>
+                </div>
+                <div class="typography-example">
+                    <div class="typography-label">Heading 2</div>
+                    <h2 style="font-family: 'Poppins', sans-serif; font-weight: 600;">Secure Shopping Experience</h2>
+                    <div class="typography-specs">Poppins SemiBold • 28px • 1.3 line height</div>
+                </div>
+                <div class="typography-example">
+                    <div class="typography-label">Body Text</div>
+                    <p style="font-family: 'Inter', sans-serif;">Shop with confidence on our secure platform with verified sellers.</p>
+                    <div class="typography-specs">Inter Regular • 16px • 1.5 line height</div>
+                </div>
+                <div class="typography-example">
+                    <div class="typography-label">Security Badge Text</div>
+                    <p style="font-family: 'Roboto Mono', monospace; font-size: 14px;">SSL SECURED</p>
+                    <div class="typography-specs">Roboto Mono • 14px • 1.2 line height</div>
+                </div>
+            </div>
+            
+            <!-- Spacing -->
+            <div class="section">
+                <h3 class="section-title">Spacing System</h3>
+                <div class="spacing-grid">
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 8px; height: 32px;">8</div>
+                        <span>Extra Small</span>
+                    </div>
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 16px; height: 32px;">16</div>
+                        <span>Small</span>
+                    </div>
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 24px; height: 32px;">24</div>
+                        <span>Medium</span>
+                    </div>
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 32px; height: 32px;">32</div>
+                        <span>Large</span>
+                    </div>
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 48px; height: 32px;">48</div>
+                        <span>Extra Large</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Components -->
+            <div class="section">
+                <h3 class="section-title">Core Components</h3>
+                <div class="component-grid">
+                    <div class="component-example">
+                        <div class="component-label">Buttons</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button class="button button-primary">Pay Securely</button>
+                            <button class="button button-secondary">Learn More</button>
+                            <button class="button button-success">Verified ✓</button>
+                        </div>
+                    </div>
+                    <div class="component-example">
+                        <div class="component-label">Trust Badges</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: #d1fae5; color: #047857; padding: 0.5rem 1rem; border-radius: 1.5rem;">✓ Verified</span>
+                            <span style="background: #dbeafe; color: #1e40af; padding: 0.5rem 1rem; border-radius: 1.5rem;">🛡️ Secure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Icons -->
+            <div class="section">
+                <h3 class="section-title">Icon Set</h3>
+                <div class="icon-grid">
+                    <div class="icon-card">
+                        <div class="icon-symbol">🔒</div>
+                        <div class="icon-name">Secure</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">✓</div>
+                        <div class="icon-name">Verified</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">🛡️</div>
+                        <div class="icon-name">Protection</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">💳</div>
+                        <div class="icon-name">Payment</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">⭐</div>
+                        <div class="icon-name">Rating</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">📦</div>
+                        <div class="icon-name">Product</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Team 2: Child-Safe Browsing -->
+        <div class="team-section team2">
+            <h2 class="team-title">Team 2: Child-Safe Browsing</h2>
+            
+            <!-- Color Palette -->
+            <div class="section">
+                <h3 class="section-title">Color Palette</h3>
+                <div class="color-grid">
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #7c3aed;">Primary</div>
+                        <div class="color-info">
+                            <div class="color-name">Friendly Purple</div>
+                            <div class="color-hex">#7c3aed</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #a78bfa;">Secondary</div>
+                        <div class="color-info">
+                            <div class="color-name">Light Purple</div>
+                            <div class="color-hex">#a78bfa</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #3b82f6;">Info</div>
+                        <div class="color-info">
+                            <div class="color-name">Safe Blue</div>
+                            <div class="color-hex">#3b82f6</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #fbbf24;">Warning</div>
+                        <div class="color-info">
+                            <div class="color-name">Caution Yellow</div>
+                            <div class="color-hex">#fbbf24</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #ef4444;">Alert</div>
+                        <div class="color-info">
+                            <div class="color-name">Danger Red</div>
+                            <div class="color-hex">#ef4444</div>
+                        </div>
+                    </div>
+                    <div class="color-card">
+                        <div class="color-swatch" style="background: #f3f4f6; color: #000;">Background</div>
+                        <div class="color-info">
+                            <div class="color-name">Soft Gray</div>
+                            <div class="color-hex">#f3f4f6</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Typography -->
+            <div class="section">
+                <h3 class="section-title">Typography</h3>
+                <div class="typography-example">
+                    <div class="typography-label">Heading 1</div>
+                    <h1 style="font-family: 'Nunito', sans-serif; font-weight: 700;">SafeGuard for Kids</h1>
+                    <div class="typography-specs">Nunito Bold • 36px • 1.2 line height</div>
+                </div>
+                <div class="typography-example">
+                    <div class="typography-label">Heading 2</div>
+                    <h2 style="font-family: 'Nunito', sans-serif; font-weight: 600;">Protection Dashboard</h2>
+                    <div class="typography-specs">Nunito SemiBold • 28px • 1.3 line height</div>
+                </div>
+                <div class="typography-example">
+                    <div class="typography-label">Body Text</div>
+                    <p style="font-family: 'Open Sans', sans-serif;">Your child is protected while browsing online.</p>
+                    <div class="typography-specs">Open Sans Regular • 16px • 1.5 line height</div>
+                </div>
+                <div class="typography-example">
+                    <div class="typography-label">Alert Text</div>
+                    <p style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: #ef4444;">Content Blocked</p>
+                    <div class="typography-specs">Montserrat SemiBold • 16px • 1.2 line height</div>
+                </div>
+            </div>
+            
+            <!-- Spacing -->
+            <div class="section">
+                <h3 class="section-title">Spacing System</h3>
+                <div class="spacing-grid">
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 8px; height: 32px;">8</div>
+                        <span>Extra Small</span>
+                    </div>
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 16px; height: 32px;">16</div>
+                        <span>Small</span>
+                    </div>
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 24px; height: 32px;">24</div>
+                        <span>Medium</span>
+                    </div>
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 32px; height: 32px;">32</div>
+                        <span>Large</span>
+                    </div>
+                    <div class="spacing-example">
+                        <div class="spacing-box" style="width: 48px; height: 32px;">48</div>
+                        <span>Extra Large</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Components -->
+            <div class="section">
+                <h3 class="section-title">Core Components</h3>
+                <div class="component-grid">
+                    <div class="component-example">
+                        <div class="component-label">Buttons</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <button class="button" style="background: #7c3aed; color: white;">Enable Protection</button>
+                            <button class="button button-secondary">Settings</button>
+                            <button class="button button-danger">Block Content</button>
+                        </div>
+                    </div>
+                    <div class="component-example">
+                        <div class="component-label">Status Indicators</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <span style="background: #dcfce7; color: #15803d; padding: 0.5rem 1rem; border-radius: 1.5rem;">🛡️ Protected</span>
+                            <span style="background: #fee2e2; color: #991b1b; padding: 0.5rem 1rem; border-radius: 1.5rem;">⚠️ Alert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Icons -->
+            <div class="section">
+                <h3 class="section-title">Icon Set</h3>
+                <div class="icon-grid">
+                    <div class="icon-card">
+                        <div class="icon-symbol">🛡️</div>
+                        <div class="icon-name">Shield</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">⚠️</div>
+                        <div class="icon-name">Warning</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">👀</div>
+                        <div class="icon-name">Monitor</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">🚫</div>
+                        <div class="icon-name">Block</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">📱</div>
+                        <div class="icon-name">Device</div>
+                    </div>
+                    <div class="icon-card">
+                        <div class="icon-symbol">👨‍👧</div>
+                        <div class="icon-name">Family</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Common Guidelines -->
+        <div class="team-section" style="border-top: 4px solid #3b82f6;">
+            <h2 class="team-title" style="color: #1e3a8a;">Common Design Guidelines</h2>
+            
+            <div class="section">
+                <h3 class="section-title">Accessibility Standards</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: #10b981;">✓</span> Maintain minimum contrast ratio of 4.5:1 for text
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: #10b981;">✓</span> Use minimum touch target size of 44x44px
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: #10b981;">✓</span> Support keyboard navigation and screen readers
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: #10b981;">✓</span> Provide text alternatives for images and icons
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">Responsive Design Breakpoints</h3>
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <div style="text-align: center;">
+                        <div style="font-weight: bold;">Mobile</div>
+                        <div style="color: #6b7280;">320px - 480px</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-weight: bold;">Tablet</div>
+                        <div style="color: #6b7280;">768px - 1024px</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-weight: bold;">Desktop</div>
+                        <div style="color: #6b7280;">1280px+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

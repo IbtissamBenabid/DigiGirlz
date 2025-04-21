@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Journey Mapping Exercise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            color: #1f2937;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1e3a8a;
+        }
+        
+        .exercise-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 1rem;
+        }
+        
+        .team-journey {
+            margin-bottom: 4rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .team1 {
+            border-top: 4px solid #10b981;
+        }
+        
+        .team2 {
+            border-top: 4px solid #7c3aed;
+        }
+        
+        .team-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .team1 .team-title {
+            color: #047857;
+        }
+        
+        .team2 .team-title {
+            color: #6d28d9;
+        }
+        
+        .persona-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+        }
+        
+        .persona-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .team1 .persona-avatar {
+            background: #d1fae5;
+        }
+        
+        .team2 .persona-avatar {
+            background: #ede9fe;
+        }
+        
+        .journey-flow {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .journey-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+        
+        .team1 .journey-line {
+            background: linear-gradient(90deg, #d1fae5, #10b981);
+        }
+        
+        .team2 .journey-line {
+            background: linear-gradient(90deg, #ede9fe, #7c3aed);
+        }
+        
+        .journey-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .journey-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 16%;
+        }
+        
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 3px solid;
+        }
+        
+        .team1 .step-icon {
+            border-color: #10b981;
+        }
+        
+        .team2 .step-icon {
+            border-color: #7c3aed;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-description {
+            font-size: 0.9rem;
+            text-align: center;
+            color: #6b7280;
+        }
+        
+        .emotional-journey {
+            margin-top: 3rem;
+            position: relative;
+            padding: 1rem 0;
+        }
+        
+        .emotion-chart {
+            height: 100px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 0 2rem;
+            position: relative;
+        }
+        
+        .emotion-baseline {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 50%;
+            height: 1px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+        
+        .emotion-point {
+            width: 16%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .emotion-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+        
+        .team2 .emotion-dot {
+            background: #7c3aed;
+        }
+        
+        .emotion-line {
+            position: absolute;
+            background: #10b981;
+            height: 3px;
+            transform-origin: 0 50%;
+        }
+        
+        .team2 .emotion-line {
+            background: #7c3aed;
+        }
+        
+        .emotion-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-align: center;
+        }
+        
+        .touchpoints {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .touchpoint-card {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        
+        .touchpoint-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .touchpoint-title {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        
+        .touchpoint-description {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .opportunities {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f0fdf4;
+            border-radius: 0.5rem;
+        }
+        
+        .team2 .opportunities {
+            background: #f5f3ff;
+        }
+        
+        .opportunities-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .opportunities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            list-style: none;
+        }
+        
+        .opportunity-item {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend {
+            margin-top: 3rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="exercise-header">
+            <h1>Exercise 2: User Journey Mapping</h1>
+            <p>Visualize how users interact with your solution from start to finish</p>
+        </div>
+        
+        <!-- Team 1 Journey Map -->
+        <div class="team-journey team1">
+            <h2 class="team-title">Team 1: E-commerce Trust Platform</h2>
+            
+            <div class="persona-info">
+                <div class="persona-avatar">👩</div>
+                <div>
+                    <h3>Fatima's Shopping Journey</h3>
+                    <p>A skeptical online shopper explores the trusted e-commerce platform</p>
+                </div>
+            </div>
+            
+            <div class="journey-flow">
+                <div class="journey-line"></div>
+                <div class="journey-steps">
+                    <div class="journey-step">
+                        <div class="step-icon">🌐</div>
+                        <div class="step-title">Discover</div>
+                        <div class="step-description">Learns about the platform through social media</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">🔐</div>
+                        <div class="step-title">Explore</div>
+                        <div class="step-description">Reads security features and guarantees</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">✓</div>
+                        <div class="step-title">Verify</div>
+                        <div class="step-description">Checks seller verification and reviews</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">🛒</div>
+                        <div class="step-title">Shop</div>
+                        <div class="step-description">Selects products and adds to cart</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">💳</div>
+                        <div class="step-title">Pay Securely</div>
+                        <div class="step-description">Completes secure transaction</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">⭐</div>
+                        <div class="step-title">Review</div>
+                        <div class="step-description">Shares feedback and builds trust</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="emotional-journey">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Emotional Journey</h3>
+                <div class="emotion-chart">
+                    <div class="emotion-baseline"></div>
+                    <div class="emotion-point" style="height: 30%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Curious but skeptical</div>
+                    </div>
+                    <div class="emotion-point" style="height: 50%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Interested</div>
+                    </div>
+                    <div class="emotion-point" style="height: 70%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">More confident</div>
+                    </div>
+                    <div class="emotion-point" style="height: 60%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Excited</div>
+                    </div>
+                    <div class="emotion-point" style="height: 40%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Slightly anxious</div>
+                    </div>
+                    <div class="emotion-point" style="height: 90%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Satisfied and trusting</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Key Touchpoints</h3>
+            <div class="touchpoints">
+                <div class="touchpoint-card">
+                    <div class="touchpoint-icon">📱</div>
+                    <div class="touchpoint-title">Mobile App</div>
+                    <div class="touchpoint-description">Primary shopping interface</div>
+                </div>
+                <div class="touchpoint-card">
+                    <div class="touchpoint-icon">🛡️</div>
+                    <div class="touchpoint-title">Security Center</div>
+                    <div class="touchpoint-description">Education and trust info</div>
+                </div>
+                <div class="touchpoint-card">
+                    <div class="touchpoint-icon">💬</div>
+                    <div class="touchpoint-title">Customer Support</div>
+                    <div class="touchpoint-description">24/7 assistance</div>
+                </div>
+                <div class="touchpoint-card">
+                    <div class="touchpoint-icon">📧</div>
+                    <div class="touchpoint-title">Email</div>
+                    <div class="touchpoint-description">Order confirmations</div>
+                </div>
+            </div>
+            
+            <div class="opportunities">
+                <div class="opportunities-title">
+                    <span>💡</span> Design Opportunities
+                </div>
+                <ul class="opportunities-list">
+                    <li class="opportunity-item">
+                        <span>1️⃣</span> Visual trust indicators throughout the journey
+                    </li>
+                    <li class="opportunity-item">
+                        <span>2️⃣</span> Progressive disclosure of security features
+                    </li>
+                    <li class="opportunity-item">
+                        <span>3️⃣</span> Clear verification badges for sellers
+                    </li>
+                    <li class="opportunity-item">
+                        <span>4️⃣</span> Reassurance messages during checkout
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Team 2 Journey Map -->
+        <div class="team-journey team2">
+            <h2 class="team-title">Team 2: Child-Safe Browsing AI Solution</h2>
+            
+            <div class="persona-info">
+                <div class="persona-avatar">👨</div>
+                <div>
+                    <h3>Ahmed's Protection Setup Journey</h3>
+                    <p>A parent setting up online protection for his 12-year-old daughter</p>
+                </div>
+            </div>
+            
+            <div class="journey-flow">
+                <div class="journey-line"></div>
+                <div class="journey-steps">
+                    <div class="journey-step">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-title">Research</div>
+                        <div class="step-description">Looks for child safety solutions</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">📲</div>
+                        <div class="step-title">Install</div>
+                        <div class="step-description">Downloads the app</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">⚙️</div>
+                        <div class="step-title">Configure</div>
+                        <div class="step-description">Sets up protection level</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">👧</div>
+                        <div class="step-title">Onboard</div>
+                        <div class="step-description">Adds child profile</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">🛡️</div>
+                        <div class="step-title">Monitor</div>
+                        <div class="step-description">Reviews activity</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">🚨</div>
+                        <div class="step-title">Respond</div>
+                        <div class="step-description">Handles alerts</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="emotional-journey">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Emotional Journey</h3>
+                <div class="emotion-chart">
+                    <div class="emotion-baseline"></div>
+                    <div class="emotion-point" style="height: 40%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Worried</div>
+                    </div>
+                    <div class="emotion-point" style="height: 60%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Hopeful</div>
+                    </div>
+                    <div class="emotion-point" style="height: 50%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Focused</div>
+                    </div>
+                    <div class="emotion-point" style="height: 70%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Confident</div>
+                    </div>
+                    <div class="emotion-point" style="height: 80%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Reassured</div>
+                    </div>
+                    <div class="emotion-point" style="height: 60%;">
+                        <div class="emotion-dot"></div>
+                        <div class="emotion-label">Alert but prepared</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="persona-info" style="margin-top: 3rem;">
+                <div class="persona-avatar">👧</div>
+                <div>
+                    <h3>Sara's Browsing Experience</h3>
+                    <p>A 12-year-old using the internet with AI protection active</p>
+                </div>
+            </div>
+            
+            <div class="journey-flow">
+                <div class="journey-line"></div>
+                <div class="journey-steps">
+                    <div class="journey-step">
+                        <div class="step-icon">🌐</div>
+                        <div class="step-title">Browse</div>
+                        <div class="step-description">Explores internet normally</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">🤖</div>
+                        <div class="step-title">AI Active</div>
+                        <div class="step-description">Real-time protection</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">⚠️</div>
+                        <div class="step-title">Detect</div>
+                        <div class="step-description">AI identifies risk</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">🚫</div>
+                        <div class="step-title">Block</div>
+                        <div class="step-description">Prevents access</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">📚</div>
+                        <div class="step-title">Learn</div>
+                        <div class="step-description">Understands why</div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-icon">↩️</div>
+                        <div class="step-title">Continue</div>
+                        <div class="step-description">Resumes safe browsing</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Key Touchpoints</h3>
+            <div class="touchpoints">
+                <div class="touchpoint-card">
+                    <div class="touchpoint-icon">📱</div>
+                    <div class="touchpoint-title">Mobile App</div>
+                    <div class="touchpoint-description">Parent dashboard</div>
+                </div>
+                <div class="touchpoint-card">
+                    <div class="touchpoint-icon">💻</div>
+                    <div class="touchpoint-title">Browser</div>
+                    <div class="touchpoint-description">Child's interface</div>
+                </div>
+                <div class="touchpoint-card">
+                    <div class="touchpoint-icon">🔔</div>
+                    <div class="touchpoint-title">Notifications</div>
+                    <div class="touchpoint-description">Real-time alerts</div>
+                </div>
+                <div class="touchpoint-card">
+                    <div class="touchpoint-icon">📊</div>
+                    <div class="touchpoint-title">Reports</div>
+                    <div class="touchpoint-description">Activity summaries</div>
+                </div>
+            </div>
+            
+            <div class="opportunities">
+                <div class="opportunities-title">
+                    <span>💡</span> Design Opportunities
+                </div>
+                <ul class="opportunities-list">
+                    <li class="opportunity-item">
+                        <span>1️⃣</span> Simplified initial setup wizard
+                    </li>
+                    <li class="opportunity-item">
+                        <span>2️⃣</span> Age-appropriate alert messaging
+                    </li>
+                    <li class="opportunity-item">
+                        <span>3️⃣</span> Visual activity heatmaps
+                    </li>
+                    <li class="opportunity-item">
+                        <span>4️⃣</span> Educational content integration
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <h3>Journey Mapping Components</h3>
+            <p>Steps • Emotions • Touchpoints • Opportunities</p>
+        </div>
+    </div>
+    
+    <script>
+        // Add connecting lines between emotion points
+        document.addEventListener('DOMContentLoaded', function() {
+            const emotionCharts = document.querySelectorAll('.emotion-chart');
+            
+            emotionCharts.forEach(chart => {
+                const points = chart.querySelectorAll('.emotion-point');
+                
+                for (let i = 0; i < points.length - 1; i++) {
+                    const current = points[i];
+                    const next = points[i + 1];
+                    
+                    const currentDot = current.querySelector('.emotion-dot');
+                    const nextDot = next.querySelector('.emotion-dot');
+                    
+                    const line = document.createElement('div');
+                    line.className = 'emotion-line';
+                    
+                    // Calculate line position and angle
+                    const currentRect = currentDot.getBoundingClientRect();
+                    const nextRect = nextDot.getBoundingClientRect();
+                    const chartRect = chart.getBoundingClientRect();
+                    
+                    const x1 = currentRect.left + currentRect.width / 2 - chartRect.left;
+                    const y1 = currentRect.top + currentRect.height / 2 - chartRect.top;
+                    const x2 = nextRect.left + nextRect.width / 2 - chartRect.left;
+                    const y2 = nextRect.top + nextRect.height / 2 - chartRect.top;
+                    
+                    const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                    
+                    line.style.width = `${length}px`;
+                    line.style.left = `${x1}px`;
+                    line.style.top = `${y1}px`;
+                    line.style.transform = `rotate(${angle}deg)`;
+                    
+                    chart.appendChild(line);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
