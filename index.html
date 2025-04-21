@@ -3,88 +3,575 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Achraf!</title>
+    <title>DigiGirlz Figma Workshop</title>
     <style>
-   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: url('https://i.ibb.co/v69nG5xs/Whats-App-Image-2025-02-09-21-54-32-402915ec.jpg') no-repeat center center/cover;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
-
-
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 300px;
-            position: relative;
-            transform: scale(0);
-            animation: popIn 0.5s forwards 0.5s;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        @keyframes popIn {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            overflow-x: hidden;
         }
-        h1 {
-            color: #ff4b5c;
-        }
-        .message {
+        
+        .slide {
+            width: 100vw;
+            height: 100vh;
             display: none;
-            font-size: 16px;
-            margin-top: 10px;
-            color: #333;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
-        button {
-            margin-top: 15px;
-            padding: 10px 20px;
+        
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #a78bfa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #a78bfa;
+        }
+        
+        p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: center;
+            max-width: 800px;
+        }
+        
+        .content-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .content-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 100;
+        }
+        
+        .nav-button {
+            padding: 0.8rem 2rem;
             border: none;
-            border-radius: 5px;
-            background-color: #ff4b5c;
+            border-radius: 2rem;
+            background: #3b82f6;
             color: white;
-            font-size: 16px;
+            font-size: 1rem;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
-        button:hover {
-            background-color: #ff7b89;
+        
+        .nav-button:hover {
+            background: #2563eb;
         }
-        .confetti {
+        
+        .nav-button:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #a78bfa, #3b82f6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .exercise-card {
+            background: linear-gradient(135deg, rgba(167,139,250,0.1), rgba(59,130,246,0.1));
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+        
+        .team-example {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        
+        .team1 {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+        }
+        
+        .team2 {
+            background: rgba(124, 58, 237, 0.1);
+            border-left: 4px solid #7c3aed;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            margin: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .checklist li:before {
+            content: '✓';
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: gold;
-            opacity: 0.7;
-            animation: fall 3s linear infinite;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
         }
-        @keyframes fall {
-            from { transform: translateY(-100vh) rotate(0deg); }
-            to { transform: translateY(100vh) rotate(360deg); }
+        
+        .highlight {
+            background: rgba(167, 139, 250, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.3rem;
+        }
+        
+        .demo-animation {
+            margin: 2rem 0;
+            padding: 2rem;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            text-align: center;
+        }
+        
+        .keyboard-tip {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 0.3rem;
+            font-family: monospace;
+            font-size: 1.1rem;
+            margin: 0 0.3rem;
+
+        }
+
+        .resource-button {
+            display: inline-block;
+            margin: 1rem 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #a78bfa, #3b82f6);
+            color: white;
+            text-decoration: none;
+            border-radius: 2rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .resource-button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>🎉 Happy Birthday Achraf! 🎂</h1>
-        <p>Click the button to open your surprise!</p>
-        <button onclick="showMessage()">Open</button>
-        <p class="message" id="hiddenMessage">Dear Achraf, I'm truly grateful to have you as a friend. Your kindness and positive energy always brighten my day! Wishing you a birthday filled with laughter, love, and all the happiness you deserve! 🎈🎁🥳</p>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Slide 1: Welcome -->
+    <div class="slide active" id="slide1">
+        <h1>DigiGirlz Figma Workshop</h1>
+        <h2>From Idea to Prototype</h2>
+        <p>Bringing Your Cybersecurity Solutions to Life</p>
+        <div class="content-box">
+            <p>Today we'll transform your amazing project ideas into interactive prototypes using Figma!</p>
+        </div>
     </div>
+    
+    <!-- Slide 2: Workshop Overview -->
+    <div class="slide" id="slide2">
+        <h1>Workshop Overview</h1>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="icon">💡</div>
+                <h3>1. Ideation</h3>
+                <p>Refining your solution ideas</p>
+            </div>
+            <div class="content-card">
+                <div class="icon">✏️</div>
+                <h3>2. Sketching</h3>
+                <p>Visualizing user journeys</p>
+            </div>
+            <div class="content-card">
+                <div class="icon">🎨</div>
+                <h3>3. Figma Basics</h3>
+                <p>Learning essential tools</p>
+            </div>
+            <div class="content-card">
+                <div class="icon">🔄</div>
+                <h3>4. Prototyping</h3>
+                <p>Creating interactive designs</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 3: Meet Your Projects -->
+    <div class="slide" id="slide3">
+        <h1>Meet Your Projects</h1>
+        <div class="content-grid">
+            <div class="content-card team1">
+                <h3>Team 1: E-commerce Trust Platform</h3>
+                <p>Building trust in Moroccan e-commerce through secure payment systems, education, and transparent reviews</p>
+                <div class="demo-animation">🔒 → 💳 → ⭐</div>
+            </div>
+            <div class="content-card team2">
+                <h3>Team 2: Child-Safe Browsing</h3>
+                <p>Real-time AI protection for children online with instant alerts and parental controls</p>
+                <div class="demo-animation">👨‍👩‍👧‍👦 → 🛡️ → 🚨</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 4: Understanding Your Users -->
+    <div class="slide" id="slide4">
+        <h1>Understanding Your Users</h1>
+        <div class="content-box">
+            <h3>Creating User Personas</h3>
+            <p>Putting a face to your target audience</p>
+            <div class="content-grid">
+                <div class="team-example team1">
+                    <div>👤</div>
+                    <div>
+                        <strong>Team 1:</strong> Fatima, 35, skeptical online shopper
+                        <br>Wants convenience but fears data theft
+                    </div>
+                </div>
+                <div class="team-example team2">
+                    <div>👨‍👧</div>
+                    <div>
+                        <strong>Team 2:</strong> Ahmed, parent of 12-year-old Sara
+                        <br>Concerned about online safety without being intrusive
+                    </div>
+                </div>
+            </div>
+            <a href="user-personas-visual.html" class="resource-button">View User personas</a>
+        </div>
+    </div>
+    
+    <!-- Slide 5: Ideation Process -->
+    <div class="slide" id="slide5">
+        <h1>Ideation Process</h1>
+        <div class="content-box">
+            <h3>From Problem to Solution</h3>
+            <div class="exercise-card">
+                <h3>Exercise 1: Problem Statement Refinement</h3>
+                <ul class="checklist">
+                    <li>Define the core problem clearly</li>
+                    <li>Identify the main pain points</li>
+                    <li>Brainstorm potential solutions</li>
+                    <li>Prioritize features (MoSCoW method)</li>
+                </ul>
+            </div>
+            <a href="problem-refinement-exercise.html" class="resource-button">View Problem Refinement</a>
+        </div>
+    </div>
+    
+    <!-- Slide 6: Sketching User Flows -->
+    <div class="slide" id="slide6">
+        <h1>Sketching User Flows</h1>
+        <div class="content-box">
+            <h3>Mapping the User Journey</h3>
+            <div class="content-grid">
+                <div class="team-example team1">
+                    <strong>Team 1 Flow:</strong>
+                    Discover → Verify → Shop → Pay Securely → Review
+                </div>
+                <div class="team-example team2">
+                    <strong>Team 2 Flow:</strong>
+                    Setup → Browse → Detect → Alert → Protect
+                </div>
+            </div>
+            <div class="exercise-card">
+                <h3>Exercise 2: Create Your User Flow</h3>
+                <p>Map out how users will interact with your solution</p>
+            </div>
+            <a href="user-journey-mapping.html" class="resource-button">View User Journey</a>
+
+        </div>
+    </div>
+    
+    <!-- Slide 7: Introduction to Figma -->
+    <div class="slide" id="slide7">
+        <h1>Getting Started with Figma</h1>
+        <div class="content-box">
+            <h3>Basic Tools & Navigation</h3>
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="keyboard-tip">F</div>
+                    <p>Create Frame</p>
+                </div>
+                <div class="content-card">
+                    <div class="keyboard-tip">R</div>
+                    <p>Rectangle Tool</p>
+                </div>
+                <div class="content-card">
+                    <div class="keyboard-tip">T</div>
+                    <p>Text Tool</p>
+                </div>
+                <div class="content-card">
+                    <div class="keyboard-tip">V</div>
+                    <p>Move Tool</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 8: Creating Wireframes -->
+    <div class="slide" id="slide8">
+        <h1>Creating Wireframes</h1>
+        <div class="content-box">
+            <h3>Low-Fidelity Designs</h3>
+            <div class="exercise-card">
+                <h3>Exercise 3: Basic Wireframe</h3>
+                <ul class="checklist">
+                    <li>Create a mobile frame (iPhone 13 Pro)</li>
+                    <li>Add header, navigation, and content areas</li>
+                    <li>Use simple shapes and placeholders</li>
+                </ul>
+            </div>
+            <a href="mobile-app-prototypes.html" class="resource-button">View Mobile wireframe</a>
+
+        </div>
+    </div>
+    
+    <!-- Slide 9: Components & Design Systems -->
+    <div class="slide" id="slide9">
+        <h1>Components & Design Systems</h1>
+        <div class="content-box">
+            <h3>Building Reusable Elements</h3>
+            <div class="content-grid">
+                <div class="team-example team1">
+                    <strong>Team 1:</strong> Trust badges, security indicators, review cards
+                </div>
+                <div class="team-example team2">
+                    <strong>Team 2:</strong> Alert notifications, safety badges, age indicators
+                </div>
+            </div>
+            <div class="exercise-card">
+                <h3>Exercise 4: Create Your First Component</h3>
+                <p>Turn repeated elements into reusable components</p>
+            </div>
+            <a href="reusable-components-guide.html" class="resource-button">View Reusable Components</a>
+            <a href="design-system-guide.html" class="resource-button">View Design system</a>
+
+        </div>
+    </div>
+    
+    <!-- Slide 10: Prototyping -->
+    <div class="slide" id="slide10">
+        <h1>Interactive Prototyping</h1>
+        <div class="content-box">
+            <h3>Bringing Your Design to Life</h3>
+            <div class="exercise-card">
+                <h3>Exercise 5: Create Interactions</h3>
+                <ul class="checklist">
+                    <li>Switch to Prototype mode</li>
+                    <li>Connect screens with interactions</li>
+                    <li>Add overlays for alerts/popups</li>
+                    <li>Preview and test your prototype</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 11: Best Practices -->
+    <div class="slide" id="slide11">
+        <h1>Design Best Practices</h1>
+        <div class="content-grid">
+            <div class="content-card">
+                <h3>Consistency</h3>
+                <p>Use design systems and components</p>
+            </div>
+            <div class="content-card">
+                <h3>Hierarchy</h3>
+                <p>Make important elements stand out</p>
+            </div>
+            <div class="content-card">
+                <h3>Spacing</h3>
+                <p>Use auto layout for consistent spacing</p>
+            </div>
+            <div class="content-card">
+                <h3>Accessibility</h3>
+                <p>Ensure readable text and good contrast</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 12: Next Steps -->
+    <div class="slide" id="slide12">
+        <h1>Next Steps</h1>
+        <div class="content-box">
+            <h3>Continue Your Design Journey</h3>
+            <ul class="checklist">
+                <li>Complete your personas and user flows</li>
+                <li>Build your wireframes</li>
+                <li>Create a design system</li>
+                <li>Develop interactive prototypes</li>
+                <li>Test with potential users</li>
+                <li>Iterate based on feedback</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 13: Resources -->
+    <div class="slide" id="slide13">
+        <h1>Resources</h1>
+        <div class="content-box">
+            <h3>Continue Learning</h3>
+            <ul class="checklist">
+                <li>Figma Community for templates and components</li>
+                <li>Figma YouTube channel for tutorials</li>
+                <li>UX design blogs and communities</li>
+                <li>Online courses for UI/UX design</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 14: Q&A -->
+    <div class="slide" id="slide14">
+        <h1>Questions & Answers</h1>
+        <div class="content-box">
+            <h2>Let's Discuss!</h2>
+            <p>What questions do you have about:</p>
+            <ul class="checklist">
+                <li>Figma tools and features?</li>
+                <li>UX design principles?</li>
+                <li>Your specific project challenges?</li>
+                <li>Next steps for your prototype?</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Slide 15: Thank You -->
+    <div class="slide" id="slide15">
+        <h1>Thank You!</h1>
+        <h2>You're on Your Way to Creating Amazing Designs!</h2>
+        <div class="content-box">
+            <p>Remember: Great design comes from understanding your users and iterating based on feedback. Keep designing, keep learning!</p>
+        </div>
+    </div>
+    
+    <div class="navigation">
+        <button class="nav-button" id="prevBtn" disabled>Previous</button>
+        <button class="nav-button" id="nextBtn">Next</button>
+    </div>
+    
     <script>
-        function showMessage() {
-            document.getElementById("hiddenMessage").style.display = "block";
-            for (let i = 0; i < 30; i++) {
-                let confetti = document.createElement("div");
-                confetti.className = "confetti";
-                confetti.style.left = Math.random() * 100 + "vw";
-                confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
-                document.body.appendChild(confetti);
-            }
+        let currentSlide = 1;
+        const totalSlides = 15;
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progressBar');
+        
+        function updateSlide() {
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.getElementById(`slide${currentSlide}`).classList.add('active');
+            
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            
+            nextBtn.textContent = currentSlide === totalSlides ? 'Finish' : 'Next';
+            
+            const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
         }
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            } else if (e.key === 'ArrowLeft' && currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+        
+        updateSlide();
     </script>
 </body>
 </html>
